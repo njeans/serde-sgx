@@ -114,13 +114,6 @@ mod impossible;
 
 pub use self::impossible::Impossible;
 
-#[cfg(feature = "std")]
-#[doc(no_inline)]
-pub use std::error::Error as StdError;
-#[cfg(not(feature = "std"))]
-#[doc(no_inline)]
-pub use std_error::Error as StdError;
-
 ////////////////////////////////////////////////////////////////////////////////
 
 macro_rules! declare_error_trait {
@@ -179,7 +172,7 @@ macro_rules! declare_error_trait {
 }
 
 #[cfg(feature = "std")]
-declare_error_trait!(Error: Sized + StdError);
+declare_error_trait!(Error: Sized + error::Error);
 
 #[cfg(not(feature = "std"))]
 declare_error_trait!(Error: Sized + Debug + Display);
